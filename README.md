@@ -113,6 +113,7 @@ Detecting three faces in an image with specified min quality and size. The outpu
 
 The found faces (and eyes) are specified by a circle with center point (cx, cy) and diameter given by size. The value of quality specifies how good and the higher the better.
 
-The generated debug.jpg image
+With the debug flag a debug image is saved in debug.jpg. It displays the found faces with a green 
+square and red squares for the eyes.
 
 ![Found faces](docs/image1_faces.jpg)
