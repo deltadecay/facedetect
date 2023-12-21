@@ -38,10 +38,6 @@ type Location struct {
 
 func NewLocationFromOffsetCenterSize(offsetX, offsetY, centerX, centerY, size int) *Location {
 	loc := Location{
-		//X1: offsetX + centerX - size/2,
-		//Y1: offsetY + centerY - size/2,
-		//X2: offsetX + centerX + size/2,
-		//Y2: offsetY + centerY + size/2,
 		CX:   offsetX + centerX,
 		CY:   offsetY + centerY,
 		Size: size,
@@ -135,6 +131,8 @@ Optional flags:
 		Min face quality to accept the face. (default 1)
   -fs float
 		Min face size to accept the face. (default 40)
+  -iou float
+  		The intersection over union threshold for cluster detection (default 0.15)
   -pretty
 		Pretty-print the json output
   -version
@@ -161,6 +159,7 @@ func main() {
 	imageFileName := flag.String("in", "", "Image file")
 	qualityThreshold := flag.Float64("fq", 1.0, "Min face quality to accept the face.")
 	sizeThreshold := flag.Float64("fs", 40, "Min face size to accept the face.")
+	iouThreshold := flag.Float64("iou", 0.15, "The intersection over union threshold for cluster detection")
 	bboxStr := flag.String("bbox", "0,0,1,1", "Bounding box to limit the search, in normalized coordinates. x,y,w,h")
 	prettyJson := flag.Bool("pretty", false, "Pretty-print the json output")
 	displayVersion := flag.Bool("version", false, "Display version")
@@ -173,7 +172,7 @@ func main() {
 	}
 
 	if len(*imageFileName) == 0 {
-		log.Fatal("Missing image file, use flag -in <image.jpg>")
+		log.Fatal("Missing image file, use flag -in <image.jpg>. See usage help with -h.")
 	}
 
 	// bbox holds four values: x,y,w,h
@@ -253,10 +252,12 @@ func main() {
 	dets := faceClassifier.RunCascade(cParams, angle)
 
 	// Calculate the intersection over union (IoU) of two clusters.
-	faces := faceClassifier.ClusterDetections(dets, 0.15)
+	faces := faceClassifier.ClusterDetections(dets, *iouThreshold)
 
 	qThresh := float32(*qualityThreshold)
 	faceSizeThresh := int(*sizeThreshold)
+	// Perturb is the number of random points to try when classifying pupils. Max is 63.
+	perturb := 63
 
 	foundFaces := make([]*FaceResult, 0)
 	for _, face := range faces {
@@ -281,7 +282,7 @@ func main() {
 					Row:      face.Row - int(0.075*float32(face.Scale)),
 					Col:      face.Col - int(0.175*float32(face.Scale)),
 					Scale:    float32(face.Scale) * 0.25,
-					Perturbs: 63,
+					Perturbs: perturb,
 				}
 				leftEye := pupilLocator.RunDetector(*puploc, *imgParams, angle, false)
 				if leftEye.Row > 0 && leftEye.Col > 0 {
@@ -298,7 +299,7 @@ func main() {
 					Row:      face.Row - int(0.075*float32(face.Scale)),
 					Col:      face.Col + int(0.185*float32(face.Scale)),
 					Scale:    float32(face.Scale) * 0.25,
-					Perturbs: 63,
+					Perturbs: perturb,
 				}
 
 				rightEye := pupilLocator.RunDetector(*puploc, *imgParams, angle, false)
