@@ -78,6 +78,10 @@ func getSubRectangleForImage(img image.Image, bboxParams []float64) *image.Recta
 	width := img.Bounds().Dx()
 	height := img.Bounds().Dy()
 
+	if len(bboxParams) < 4 {
+		panic("bboxParams should have four values")
+	}
+
 	// bbox holds four values: x,y,w,h
 	x1 := int(float64(width) * bboxParams[0])
 	y1 := int(float64(height) * bboxParams[1])
