@@ -1,3 +1,4 @@
+![Build](https://github.com/deltadecay/facedetect/actions/workflows/go.yml/badge.svg)
 
 # FaceDetect 
 
