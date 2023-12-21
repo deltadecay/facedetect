@@ -115,7 +115,7 @@ const figletStr = `
 const usageStr = `Usage of facedetect:
 facedetect [flags] -in image.jpg
 
-This tool tries to detect faces in the image file specified with the -in flag.
+This tool tries to detect front faces in the image file specified with the -in flag.
 Supported image formats are: jpeg.
 
 Required flags:

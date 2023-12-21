@@ -1,7 +1,7 @@
 
 # FaceDetect 
 
-FaceDetect is a simple cmd line tool to detect faces in images and output found face locations as json.
+FaceDetect is a simple cmd line tool to detect front faces in images and output found face locations as json. With front faces it is meant that both eyes are visible. 
 
 ## Go
 
@@ -13,7 +13,7 @@ To build it requires go. It has been tested with go 1.21. Perform **go mod tidy*
 Usage of facedetect:
 facedetect [flags] -in image.jpg
 
-This tool tries to detect faces in the image file specified with the -in flag.
+This tool tries to detect front faces in the image file specified with the -in flag.
 Supported image formats are: jpeg.
 
 Required flags:
@@ -43,8 +43,11 @@ Optional flags:
 
 ## Example
 
+Detect faces in a screenshot:
+![Screenshot from the movie Knives Out](docs/image1.jpg)
+
 ```sh
-./facedetect.darwin.arm64 -in image1.jpg -fq 4.0 -fs 50 -pretty  
+./facedetect.darwin.arm64 -in docs/image1.jpg -debug -fq 4.0 -fs 40 -pretty 
 ```
 Detecting three faces in an image with specified min quality and size. The output json could look like:
 ```json
@@ -110,4 +113,6 @@ Detecting three faces in an image with specified min quality and size. The outpu
 
 The found faces (and eyes) are specified by a circle with center point (cx, cy) and diameter given by size. The value of quality specifies how good and the higher the better.
 
+The generated debug.jpg image
 
+![Found faces](docs/image1_faces.jpg)
