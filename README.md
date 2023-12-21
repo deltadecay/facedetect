@@ -55,57 +55,57 @@ Detecting three faces in an image with specified min quality and size. The outpu
    "faces": [
       {
          "face": {
-            "cx": 446,
-            "cy": 146,
-            "size": 93
-         },
-         "lefteye": {
-            "cx": 434,
-            "cy": 141,
-            "size": 7
-         },
-         "righteye": {
-            "cx": 457,
-            "cy": 135,
-            "size": 7
-         },
-         "quality": 9.952968
-      },
-      {
-         "face": {
-            "cx": 159,
-            "cy": 105,
-            "size": 93
-         },
-         "lefteye": {
-            "cx": 142,
-            "cy": 101,
-            "size": 7
-         },
-         "righteye": {
-            "cx": 174,
-            "cy": 102,
-            "size": 7
-         },
-         "quality": 191.7723
-      },
-      {
-         "face": {
-            "cx": 610,
+            "cx": 338,
             "cy": 151,
-            "size": 61
+            "size": 127
          },
          "lefteye": {
-            "cx": 601,
-            "cy": 149,
-            "size": 5
+            "cx": 315,
+            "cy": 138,
+            "size": 10
          },
          "righteye": {
-            "cx": 624,
-            "cy": 149,
-            "size": 4
+            "cx": 362,
+            "cy": 145,
+            "size": 10
          },
-         "quality": 19.041996
+         "quality": 69.340576
+      },
+      {
+         "face": {
+            "cx": 719,
+            "cy": 204,
+            "size": 42
+         },
+         "lefteye": {
+            "cx": 714,
+            "cy": 201,
+            "size": 3
+         },
+         "righteye": {
+            "cx": 727,
+            "cy": 202,
+            "size": 3
+         },
+         "quality": 75.25096
+      },
+      {
+         "face": {
+            "cx": 545,
+            "cy": 182,
+            "size": 46
+         },
+         "lefteye": {
+            "cx": 540,
+            "cy": 179,
+            "size": 3
+         },
+         "righteye": {
+            "cx": 552,
+            "cy": 179,
+            "size": 3
+         },
+         "quality": 22.660633
       }
    ]
 }
